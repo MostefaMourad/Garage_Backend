@@ -21,4 +21,18 @@ Route::prefix('piece')->group(function () {
     Route::delete('/delete/{id}', 'PieceRechangeController@destroy');
  });
 
+ Route::prefix('vehicule')->group(function () {
+    Route::get('/', 'VehiculeController@index');
+    Route::post('/store', 'VehiculeController@store');
+    Route::get('/show/{id}', 'VehiculeController@show');
+    Route::patch('/update/{id}', 'VehiculeController@update');
+    Route::delete('/delete/{id}', 'VehiculeController@destroy');
+ });
 
+ Route::prefix('conducteur')->group(function () {
+    Route::get('/', 'ConducteurController@index');
+    Route::post('/store', 'ConducteurController@store');
+    Route::get('/show/{id}', 'ConducteurController@show');
+    Route::patch('/update/{id}', 'ConducteurController@update');
+    Route::delete('/delete/{id}', 'ConducteurController@destroy');
+ });
