@@ -1,0 +1,23 @@
+liste des vehicules :
+
+generer_planning(date): return planning(data, mat_vehicule,description_maintenance)
+
+ajouter_maintenance(date) | return maintenance(vehicule , data, description, pièce_utilisé)
+
+(*diminiuer une fois la pièce n'est pas dispo (impossible d'ajouter maintenance))
+
+Conducteur (Personne lié le une voiture (détails))
+
+Remplir la fiche d'état
+
+Voiture -> chaufaur ( hasOne)
+
+Voiture -> Maintenance (HasMany)
+
+(fiche d'état)
+
+PLannings 
+
+Maintenance -> HasOne (Piece d'échange)
+
+
