@@ -21,7 +21,7 @@ Route::prefix('piece')->group(function () {
     Route::delete('/delete/{id}', 'PieceRechangeController@destroy');
  });
 
- Route::prefix('vehicule')->group(function () {
+Route::prefix('vehicule')->group(function () {
     Route::get('/', 'VehiculeController@index');
     Route::post('/store', 'VehiculeController@store');
     Route::get('/show/{id}', 'VehiculeController@show');
@@ -35,4 +35,12 @@ Route::prefix('piece')->group(function () {
     Route::get('/show/{id}', 'ConducteurController@show');
     Route::patch('/update/{id}', 'ConducteurController@update');
     Route::delete('/delete/{id}', 'ConducteurController@destroy');
+ });
+
+Route::prefix('planning')->group(function () {
+    Route::get('/','PlanningController@index');
+    Route::post('/store', 'PlanningController@store');
+    Route::get('/show/{id}', 'PlanningController@show');
+    Route::patch('/update/{id}', 'PlanningController@update');
+    Route::delete('/delete/{id}', 'PlanningController@destroy');
  });
