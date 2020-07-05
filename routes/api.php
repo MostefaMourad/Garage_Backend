@@ -44,3 +44,11 @@ Route::prefix('planning')->group(function () {
     Route::patch('/update/{id}', 'PlanningController@update');
     Route::delete('/delete/{id}', 'PlanningController@destroy');
  });
+
+Route::prefix('maintenance')->group(function () {
+    Route::get('/','MaintenanceController@index');
+    Route::post('/store', 'MaintenanceController@store');
+    Route::get('/show/{id}', 'MaintenanceController@show');
+    Route::patch('/update/{id}', 'MaintenanceController@update');
+    Route::delete('/delete/{id}', 'MaintenanceController@destroy');
+ });
