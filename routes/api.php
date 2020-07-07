@@ -29,7 +29,7 @@ Route::prefix('vehicule')->group(function () {
     Route::delete('/delete/{id}', 'VehiculeController@destroy');
  });
 
- Route::prefix('conducteur')->group(function () {
+Route::prefix('conducteur')->group(function () {
     Route::get('/', 'ConducteurController@index');
     Route::post('/store', 'ConducteurController@store');
     Route::get('/show/{id}', 'ConducteurController@show');
