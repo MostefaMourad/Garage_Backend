@@ -28,7 +28,8 @@ class AjoutVehiculeRequest extends FormRequest
             'marque' => 'required|string',
             'couleur' => 'required|string',
             'categorie' => 'required|string',
-            'kilometrage' => 'nullable|numeric',    
+            'kilometrage' => 'nullable|numeric',
+            'image' => 'required|image',    
         ];
     }
 }

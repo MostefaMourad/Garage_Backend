@@ -20,4 +20,7 @@ class Vehicule extends Model
     {
         return $this->hasMany('App\Planning');
     }
+    public function etats_vehicule(){
+        return $this->hasMany('App\EtatVehicule');
+    }
 }

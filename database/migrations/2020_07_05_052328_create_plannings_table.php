@@ -23,7 +23,7 @@ class CreatePlanningsTable extends Migration
             $table->string('type_panne');
             $table->string('description_panne');
             $table->integer('vehicule_id')->unsigned();
-            $table->foreign('vehicule_id')->references('id')->on('vehicules');;
+            $table->foreign('vehicule_id')->references('id')->on('vehicules');
         });
     }
 

@@ -7,7 +7,9 @@ use App\Http\Requests\AjoutMaintenanceRequest;
 use App\Http\Requests\UpdateMaintenanceRequest;
 use App\Maintenance;
 use App\Piece_Rechange;
+use App\Vehicule;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 
 class MaintenanceController extends Controller
 {
@@ -31,6 +33,7 @@ class MaintenanceController extends Controller
         $new_maintenance->description = $request->description;
         $new_maintenance->vehicule_id = $request->vehicule_id;
         $new_maintenance->piece_id = $request->piece_id;
+        $new_maintenance->etat_maintenance = "En Attente";
         $piece->quantite -=1;
         $piece->save();
         $maintenance_save = $new_maintenance->save();
@@ -69,9 +72,12 @@ class MaintenanceController extends Controller
             if($request->has('piece_id')){
                 $maintenance->piece_id = $request->piece_id;
             }
+            if($request->has("etat")){
+                $maintenance->etat_maintenance = $request->etat;
+            }
             $maintenance_save = $maintenance->save();
             if ($maintenance_save) {
-                $response = APIHelpers::createAPIResponse(false, 201, 'Modifiction avec succes', $maintenance);
+                $response = APIHelpers::createAPIResponse(false, 200, 'Modifiction avec succes', $maintenance);
                 return response()->json($response, 200);
             } 
             else {
@@ -102,4 +108,18 @@ class MaintenanceController extends Controller
             }
         }
     }
+    public function search_immatriculation($immatriculation){
+        $veh = DB::table('vehicules')->where('immatriculation',$immatriculation)->first();
+        $vehicule = Vehicule::find($veh->id);
+        $maint = $vehicule->maintenances;
+        if($maint!=null){
+             $response = APIHelpers::createAPIResponse(false, 200, 'Maintenances Trouves', $maint);
+             return response()->json($response, 200);
+        }
+        else{
+             $response = APIHelpers::createAPIResponse(true, 400, 'echec', null);
+             return response()->json($response, 400);
+        }
+
+ }
 }

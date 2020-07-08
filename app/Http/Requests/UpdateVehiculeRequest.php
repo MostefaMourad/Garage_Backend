@@ -29,7 +29,7 @@ class UpdateVehiculeRequest extends FormRequest
             'marque' => 'nullable|string',
             'couleur' => 'nullable|string',
             'categorie' => 'nullable|string',
-            'kilometrage' => 'nullable|numeric', 
+            'kilometrage' => 'nullable|numeric'
         ];
     }
 }

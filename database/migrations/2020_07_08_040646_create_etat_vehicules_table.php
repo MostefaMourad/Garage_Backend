@@ -20,6 +20,9 @@ class CreateEtatVehiculesTable extends Migration
             $table->integer('nomre_chang_pneu');
             $table->integer('nombre_maintenance');
             $table->float('etat_batterie');
+            $table->string('immatriculation');
+            $table->integer('vehicule_id')->unsigned();
+            $table->foreign('vehicule_id')->references('id')->on('vehicules');
         });
     }
 

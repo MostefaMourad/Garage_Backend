@@ -27,6 +27,7 @@ class UpdateMaintenanceRequest extends FormRequest
             'date' => 'nullable|date',
             'description' => 'nullable|string',
             'piece_id' => 'nullable|integer|exists:piece__rechanges,id',
+            'etat' => 'nullable|string', 
         ];
     }
 }
