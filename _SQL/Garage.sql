@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 07, 2020 at 02:17 PM
+-- Generation Time: Jul 08, 2020 at 10:10 AM
 -- Server version: 5.7.30-0ubuntu0.18.04.1
 -- PHP Version: 7.0.33-29+ubuntu18.04.1+deb.sury.org+1
 
@@ -39,8 +39,35 @@ CREATE TABLE `conducteurs` (
 --
 
 INSERT INTO `conducteurs` (`id`, `nom`, `prenom`, `date_naissance`, `vehicule_id`) VALUES
-(1, 'Douzane', 'Mohammed', '1999-09-13', 2),
-(2, 'Dadi', 'Ping', '1999-11-28', 3);
+(1, 'Douzane', 'Mohammed', '1999-09-13', 1),
+(2, 'Fouzi', 'Oukacha', '1999-09-13', 2),
+(3, 'Mostefa', 'Mourad', '1999-09-13', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `etat_vehicules`
+--
+
+CREATE TABLE `etat_vehicules` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `kilometrage` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `date` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nomre_chang_pneu` int(11) NOT NULL,
+  `nombre_maintenance` int(11) NOT NULL,
+  `etat_batterie` double(8,2) NOT NULL,
+  `immatriculation` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `vehicule_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `etat_vehicules`
+--
+
+INSERT INTO `etat_vehicules` (`id`, `kilometrage`, `date`, `nomre_chang_pneu`, `nombre_maintenance`, `etat_batterie`, `immatriculation`, `vehicule_id`) VALUES
+(1, '200', '2020-09-19', 2, 5, 70.00, '33-44-55', 2),
+(2, '20', '2020-09-19', 3, 4, 90.00, '22-3333-2017', 1),
+(3, '2000', '2020-09-19', 4, 5, 50.00, '22-3333-2017', 1);
 
 -- --------------------------------------------------------
 
@@ -67,6 +94,7 @@ CREATE TABLE `maintenances` (
   `id` int(10) UNSIGNED NOT NULL,
   `date` date NOT NULL,
   `description` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `etat_maintenance` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `vehicule_id` int(10) UNSIGNED NOT NULL,
   `piece_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -75,15 +103,13 @@ CREATE TABLE `maintenances` (
 -- Dumping data for table `maintenances`
 --
 
-INSERT INTO `maintenances` (`id`, `date`, `description`, `vehicule_id`, `piece_id`) VALUES
-(2, '2020-08-20', 'reglou', 3, 2),
-(3, '2020-08-20', 'reglou', 3, 2),
-(4, '2020-08-20', 'reglou', 3, 2),
-(5, '2020-08-20', 'reglou', 3, 2),
-(6, '2020-08-20', 'reglou', 3, 2),
-(7, '2020-08-20', 'reglou', 3, 2),
-(8, '2020-08-20', 'reglou', 3, 2),
-(9, '2020-08-20', 'reglou', 3, 2);
+INSERT INTO `maintenances` (`id`, `date`, `description`, `etat_maintenance`, `vehicule_id`, `piece_id`) VALUES
+(1, '2020-08-20', 'ra7et vehicule fe dek chi', 'Validé', 2, 2),
+(2, '2020-08-20', 'tne7i pnowet brk', 'En Attente', 1, 1),
+(3, '2020-08-20', 'bedel feu rouge', 'En Attente', 3, 4),
+(4, '2020-09-20', 'ra7et vehicule fe dek chi', 'En Attente', 2, 2),
+(5, '2020-09-27', 'hehe', 'En Attente', 2, 3),
+(6, '2020-09-19', 'hehe', 'En Attente', 2, 5);
 
 -- --------------------------------------------------------
 
@@ -109,7 +135,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (5, '2020_07_05_050955_create_conducteurs_table', 1),
 (6, '2020_07_05_051158_create_maintenances_table', 1),
 (7, '2020_07_05_051945_create_piece__rechanges_table', 1),
-(8, '2020_07_05_052328_create_plannings_table', 1);
+(8, '2020_07_05_052328_create_plannings_table', 1),
+(9, '2020_07_08_040646_create_etat_vehicules_table', 1);
 
 -- --------------------------------------------------------
 
@@ -142,7 +169,11 @@ CREATE TABLE `piece__rechanges` (
 --
 
 INSERT INTO `piece__rechanges` (`id`, `nom`, `type`, `description`, `quantite`) VALUES
-(2, 'GPS', 'accessoire', 'blaa blaa blaa', 0);
+(1, 'GPS', 'accessoire', 'blaa blaa blaa', 6),
+(2, 'Batterie', 'alimentation', 'blaa blaa blaa', 5),
+(3, 'Pièces moteur Huile', 'moteur', 'Pompe à eau + Kit courroie de distributionLiquide de frein Kit de courroie d\'accessoire Kit de distribution', 3),
+(4, 'Visibilité', 'moteur', 'Balai d\'essuie-glace Phare avantAmpoule, projecteur principal Feu arrière Rétroviseur extérieur', 3),
+(5, 'Freinage', 'frein', 'Jeu de 4 plaquettes de frein avant Jeu de 2 disques de frein avant Jeu de 4 plaquettes de frein arrièreJeu de 2 disques de frein arrière Étrier de frein', 10);
 
 -- --------------------------------------------------------
 
@@ -161,16 +192,6 @@ CREATE TABLE `plannings` (
   `description_panne` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `vehicule_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `plannings`
---
-
-INSERT INTO `plannings` (`id`, `data`, `immatriculation`, `region`, `adresse`, `nom_panne`, `type_panne`, `description_panne`, `vehicule_id`) VALUES
-(2, '2020-08-20', '77-77', 'chlef', 'Chorfa', 'panne2', 'panne w sayi', 'bla blaaaa', 3),
-(3, '2020-08-20', '77-77', 'chlef', 'Chorfa', 'panne3', 'panne w sayi', 'bla blaaaa', 3),
-(4, '2020-08-20', '77-77', 'chlef', 'Chorfa', 'panne3', 'panne w sayi', 'bla blaaaa', 4),
-(5, '2020-08-20', '77-77', 'chlef', 'Chorfa', 'panne3', 'panne w sayi', 'bla blaaaa', 2);
 
 -- --------------------------------------------------------
 
@@ -201,17 +222,19 @@ CREATE TABLE `vehicules` (
   `marque` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `couleur` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `categorie` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `kilometrage` bigint(20) NOT NULL
+  `kilometrage` bigint(20) NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `vehicules`
 --
 
-INSERT INTO `vehicules` (`id`, `immatriculation`, `marque`, `couleur`, `categorie`, `kilometrage`) VALUES
-(2, '77-77', 'Ferari', 'rouge', '3rees', 5),
-(3, '77-77', 'Ferari', 'rouge', '3rees', 5),
-(4, '77-77', 'Ferari', 'rouge', '3rees', 5);
+INSERT INTO `vehicules` (`id`, `immatriculation`, `marque`, `couleur`, `categorie`, `kilometrage`, `image`) VALUES
+(1, '22-3333-2017', 'Kia', 'Noir', 'truc', 2000, 'VehiculeImages/FMJqSgUzuqwt3HiPKawRgHYDcSQQ61Y2xWQpLu6K.jpeg'),
+(2, '33-44-55', 'ferrari', 'rouge', 'truc', 0, 'VehiculeImages/ab4TYX7gEGTiSzd6GbruHX258Om4YqlM1IhYNKk5.jpeg'),
+(3, '55-66-77', 'BMW', 'blue', 'truc', 10000, 'VehiculeImages/se5cxt8inGYbf2P5irXAbZiPyGM4x4lYW9vvUvy8.jpeg'),
+(4, '55-66-88', 'ferrari', 'blue', 'truc', 10000, 'VehiculeImages/x1Wvch9NG9Eqz4DFBZLhCjX14GuNA8dp24bH9vMO.jpeg');
 
 --
 -- Indexes for dumped tables
@@ -223,6 +246,13 @@ INSERT INTO `vehicules` (`id`, `immatriculation`, `marque`, `couleur`, `categori
 ALTER TABLE `conducteurs`
   ADD PRIMARY KEY (`id`),
   ADD KEY `conducteurs_vehicule_id_foreign` (`vehicule_id`);
+
+--
+-- Indexes for table `etat_vehicules`
+--
+ALTER TABLE `etat_vehicules`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `etat_vehicules_vehicule_id_foreign` (`vehicule_id`);
 
 --
 -- Indexes for table `failed_jobs`
@@ -283,7 +313,12 @@ ALTER TABLE `vehicules`
 -- AUTO_INCREMENT for table `conducteurs`
 --
 ALTER TABLE `conducteurs`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `etat_vehicules`
+--
+ALTER TABLE `etat_vehicules`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `failed_jobs`
 --
@@ -293,22 +328,22 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `maintenances`
 --
 ALTER TABLE `maintenances`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `piece__rechanges`
 --
 ALTER TABLE `piece__rechanges`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `plannings`
 --
 ALTER TABLE `plannings`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `users`
 --
@@ -328,6 +363,12 @@ ALTER TABLE `vehicules`
 --
 ALTER TABLE `conducteurs`
   ADD CONSTRAINT `conducteurs_vehicule_id_foreign` FOREIGN KEY (`vehicule_id`) REFERENCES `vehicules` (`id`);
+
+--
+-- Constraints for table `etat_vehicules`
+--
+ALTER TABLE `etat_vehicules`
+  ADD CONSTRAINT `etat_vehicules_vehicule_id_foreign` FOREIGN KEY (`vehicule_id`) REFERENCES `vehicules` (`id`);
 
 --
 -- Constraints for table `maintenances`
