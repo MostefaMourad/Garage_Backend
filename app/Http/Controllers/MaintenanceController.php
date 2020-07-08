@@ -120,6 +120,5 @@ class MaintenanceController extends Controller
              $response = APIHelpers::createAPIResponse(true, 400, 'echec', null);
              return response()->json($response, 400);
         }
-
- }
+    }
 }

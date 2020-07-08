@@ -24,7 +24,7 @@ class AjoutVehiculeRequest extends FormRequest
     public function rules()
     {
         return [
-            'immatriculation' => 'required|string',
+            'immatriculation' => 'required|string|unique:vehicules,immatriculation',
             'marque' => 'required|string',
             'couleur' => 'required|string',
             'categorie' => 'required|string',

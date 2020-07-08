@@ -15,11 +15,11 @@ class CreateEtatVehiculesTable extends Migration
     {
         Schema::create('etat_vehicules', function (Blueprint $table) {
             $table->increments('id')->unsigned();
-            $table->string('kilometrage');
             $table->string('date');
             $table->integer('nomre_chang_pneu');
             $table->integer('nombre_maintenance');
             $table->float('etat_batterie');
+            $table->string('kilometrage');
             $table->string('immatriculation');
             $table->integer('vehicule_id')->unsigned();
             $table->foreign('vehicule_id')->references('id')->on('vehicules');

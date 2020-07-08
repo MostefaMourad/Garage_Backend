@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateVehiculeRequest extends FormRequest
+class UpdateEtatVehiculeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,11 +24,10 @@ class UpdateVehiculeRequest extends FormRequest
     public function rules()
     {
         return [
-            'immatriculation' => 'nullable|string|unique:vehicules,immatriculation',
-            'marque' => 'nullable|string',
-            'couleur' => 'nullable|string',
-            'categorie' => 'nullable|string',
-            'kilometrage' => 'nullable|numeric'
+            'nomre_chang_pneu' => 'nullable|integer',
+            'nombre_maintenance' => 'nullable|integer',
+            'kilometrage' => 'nullable|numeric',
+            'etat_batterie' => 'nullable|digits_between:0,100',
         ];
     }
 }

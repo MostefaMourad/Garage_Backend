@@ -56,3 +56,11 @@ Route::prefix('maintenance')->group(function () {
     Route::patch('/update/{id}', 'MaintenanceController@update');
     Route::delete('/delete/{id}', 'MaintenanceController@destroy');
  });
+ Route::prefix('etatVehicule')->group(function () {
+    Route::get('/','EtatVehiculeController@index');
+    Route::post('/store', 'EtatVehiculeController@store');
+    Route::get('/show/{id}', 'EtatVehiculeController@show');
+    Route::get('/searchMatricule/{immatriculation}', 'EtatVehiculeController@search_immatriculation');
+    Route::patch('/update/{id}', 'EtatVehiculeController@update');
+    Route::delete('/delete/{id}', 'EtatVehiculeController@destroy');
+ });
