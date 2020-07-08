@@ -17,6 +17,7 @@ class CreateMaintenancesTable extends Migration
             $table->increments('id')->unsigned();
             $table->date('date');
             $table->string('description');
+            $table->string('etat_maintenance');
             $table->integer('vehicule_id')->unsigned();
             $table->foreign('vehicule_id')->references('id')->on('vehicules');
             $table->integer('piece_id')->unsigned();
